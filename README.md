@@ -1,5 +1,8 @@
 #一个模仿淘宝秒杀商品页面的进度条
 
+##Feature
+有进度条加载动画
+
 ###Snapshot
 ![snapshot](https://github.com/liuhuibin/TaoBaoProgressBar/blob/master/.raw/snapshot2.jpg)
 

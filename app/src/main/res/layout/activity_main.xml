@@ -27,10 +27,10 @@
     <com.liuhb.taobaoprogressbar.com.liuhb.taobaoprogressbar.view.CustomProgressBar
         android:id="@+id/cpb_progresbar2"
         android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="120dp"
+        android:layout_height="10dp"
         app:borderWidth="2dp"
-        app:progressRadius="8dp"
+        app:progressRadius="4dp"
         app:isShowDesc="false"/>
 
 </LinearLayout>

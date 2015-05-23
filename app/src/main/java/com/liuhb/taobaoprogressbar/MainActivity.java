@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
         mProgressBar2.setProgressDesc("剩余");
         mProgressBar2.setMaxProgress(100);
         mProgressBar2.setProgressColor(Color.parseColor("#79aa6b"));
-        mProgressBar2.setCurProgress(70,2000);
+        mProgressBar2.setCurProgress(80,2000);
     }
 
     @Override

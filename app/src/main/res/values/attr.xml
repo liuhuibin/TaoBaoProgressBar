@@ -8,5 +8,6 @@
         <attr name="progress" format="integer"/>
         <attr name="borderWidth" format="dimension"/>
         <attr name="progressDesc" format="string"/>
+        <attr name="isShowDesc" format="boolean"/>
     </declare-styleable>
 </resources>

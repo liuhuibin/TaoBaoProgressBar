@@ -35,6 +35,7 @@ public class CustomProgressBar extends View {
     private int mMax;
     private int mProgress;
     private int mBorderWidth;
+    private boolean mIsShowDesc ;
 
     private int DEFAULT_MAX = 10;
     private int DEFAULT_PROGRESS = 0;
@@ -45,6 +46,7 @@ public class CustomProgressBar extends View {
     private int DEFAULT_PROGRESS_DESC_COLOR = Color.parseColor("#B4B4B4");
     private int DEFAULT_BORDER_WIDTH = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics());
+    private boolean DEFAULT_ISSHOWDESC = true ;
 
     private int mWidth;
     private int mHeight;
@@ -82,6 +84,7 @@ public class CustomProgressBar extends View {
                     DEFAULT_BORDER_WIDTH);
             mProgressDesc = a
                     .getString(R.styleable.CustomProgressBar_progressDesc);
+            mIsShowDesc = a.getBoolean(R.styleable.CustomProgressBar_isShowDesc,DEFAULT_ISSHOWDESC) ;
 
         } finally {
             a.recycle();
@@ -117,7 +120,7 @@ public class CustomProgressBar extends View {
 
         drawBorder(canvas);
         drawProgress(canvas);
-        drawProgressDesc(canvas);
+        if (mIsShowDesc)  drawProgressDesc(canvas);
     }
 
     private void drawBorder(Canvas canvas) {
@@ -254,6 +257,20 @@ public class CustomProgressBar extends View {
 
     }
 
+    /**
+     * 得到ProgressBar的最大进度
+     * @return
+     */
+    public int getMax() {
+
+        return mMax ;
+
+    }
+
+    /**
+     * 获取当前ProgressBar的进度
+     * @return
+     */
     public final int getProgress() {
 
         return  mProgress ;
@@ -268,7 +285,7 @@ public class CustomProgressBar extends View {
      * 设置当前进度条的进度(默认动画时间1.5s)
      * @param progress
      */
-    public void setCurPorgress (int progress) {
+    public void setCurProgress (int progress) {
 
         ObjectAnimator.ofInt(this,"progress",progress).setDuration(1500).start();
     }

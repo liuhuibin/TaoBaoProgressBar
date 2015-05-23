@@ -12,6 +12,7 @@ import com.liuhb.taobaoprogressbar.com.liuhb.taobaoprogressbar.view.CustomProgre
 public class MainActivity extends ActionBarActivity {
 
     private CustomProgressBar mProgressBar ;
+    private CustomProgressBar mProgressBar2 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +22,15 @@ public class MainActivity extends ActionBarActivity {
         mProgressBar = (CustomProgressBar) findViewById(R.id.cpb_progresbar);
         mProgressBar.setProgressDesc("剩余");
         mProgressBar.setMaxProgress(50);
-//        mProgressBar.setProgress(30);
         mProgressBar.setProgressColor(Color.parseColor("#F6CB82"));
-        mProgressBar.setCurPorgress(40);
+        mProgressBar.setCurProgress(40);
+
+
+        mProgressBar2 = (CustomProgressBar) findViewById(R.id.cpb_progresbar2);
+        mProgressBar2.setProgressDesc("剩余");
+        mProgressBar2.setMaxProgress(100);
+        mProgressBar2.setProgressColor(Color.parseColor("#79aa6b"));
+        mProgressBar2.setCurProgress(70,2000);
     }
 
     @Override

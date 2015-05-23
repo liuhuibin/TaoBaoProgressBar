@@ -250,7 +250,7 @@ public class CustomProgressBar extends View {
 
     }
 
-    private final void setProgress(int progress) {
+    private void setProgress(int progress) {
 
         mProgress = progress > mMax ? mMax : progress;
         invalidateView();
@@ -301,8 +301,22 @@ public class CustomProgressBar extends View {
 
     }
 
+    /**
+     * 设置ProgressBar的颜色
+     * @param color
+     */
     public void setProgressColor(int color){
         mProgressColor = color ;
+        invalidateView();
+    }
+
+    /**
+     * 设置是否显示当前进度
+     * @param isShowDesc true:显示
+     */
+    public void setIsShowDesc(boolean isShowDesc) {
+
+        mIsShowDesc = isShowDesc ;
         invalidateView();
     }
 

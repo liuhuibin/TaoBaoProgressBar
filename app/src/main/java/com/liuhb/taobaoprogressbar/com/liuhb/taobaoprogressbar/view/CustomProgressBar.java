@@ -1,6 +1,8 @@
 package com.liuhb.taobaoprogressbar.com.liuhb.taobaoprogressbar.view;
 
 
+import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -9,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Build;
 import android.os.Looper;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -244,16 +247,41 @@ public class CustomProgressBar extends View {
 
     }
 
-    public void setProgress(int progress) {
+    private final void setProgress(int progress) {
 
         mProgress = progress > mMax ? mMax : progress;
         invalidateView();
 
     }
 
+    public final int getProgress() {
+
+        return  mProgress ;
+    }
+
     public void setProgressDesc(String desc) {
         mProgressDesc = desc;
         invalidateView();
+    }
+
+    /**
+     * 设置当前进度条的进度(默认动画时间1.5s)
+     * @param progress
+     */
+    public void setCurPorgress (int progress) {
+
+        ObjectAnimator.ofInt(this,"progress",progress).setDuration(1500).start();
+    }
+
+    /**
+     * 设置当前进度条的进度
+     * @param progress 目标进度
+     * @param duration 动画时长
+     */
+    public void setCurProgress (int progress,long duration) {
+
+        ObjectAnimator.ofInt(this,"progress",progress).setDuration(duration).start();
+
     }
 
     public void setProgressColor(int color){

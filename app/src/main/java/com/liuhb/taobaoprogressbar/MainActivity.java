@@ -21,8 +21,9 @@ public class MainActivity extends ActionBarActivity {
         mProgressBar = (CustomProgressBar) findViewById(R.id.cpb_progresbar);
         mProgressBar.setProgressDesc("剩余");
         mProgressBar.setMaxProgress(50);
-        mProgressBar.setProgress(30);
+//        mProgressBar.setProgress(30);
         mProgressBar.setProgressColor(Color.parseColor("#F6CB82"));
+        mProgressBar.setCurPorgress(40);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
         mProgressBar.setProgressDesc("剩余");
         mProgressBar.setMaxProgress(50);
         mProgressBar.setProgressColor(Color.parseColor("#F6CB82"));
-        mProgressBar.setCurProgress(40);
+        mProgressBar.setCurProgress(45);
 
 
         mProgressBar2 = (CustomProgressBar) findViewById(R.id.cpb_progresbar2);

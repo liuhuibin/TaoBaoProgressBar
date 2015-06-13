@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         app:borderWidth="2dp"
-        app:progressRadius="8dp"/>
+        app:progressRadius="14dp"/>
 
     <com.liuhb.taobaoprogressbar.com.liuhb.taobaoprogressbar.view.CustomProgressBar
         android:id="@+id/cpb_progresbar2"

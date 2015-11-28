@@ -1,6 +1,8 @@
 package com.liuhb.taobaoprogressbar.com.liuhb.taobaoprogressbar.view;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -52,6 +54,26 @@ public class CustomProgressBar extends View {
     private int mHeight;
     private Rect mTextBounds;
     private String mProgressDesc = "";
+
+    private OnFinishedListener mOnFinishedListener;
+    private OnAnimationEndListener mOnAnimationEndListener;
+
+
+    /**
+     * set finish listener
+     * @param onFinishedListener
+     */
+    public void setOnFinishedListener(OnFinishedListener onFinishedListener) {
+        mOnFinishedListener = onFinishedListener;
+    }
+
+    /**
+     * set animation end listener
+     * @param onAnimationEndListener
+     */
+    public void setOnAnimationEndListener(OnAnimationEndListener onAnimationEndListener){
+        mOnAnimationEndListener = onAnimationEndListener;
+    }
 
     public CustomProgressBar(Context context) {
         this(context, null);
@@ -239,7 +261,7 @@ public class CustomProgressBar extends View {
         mTextPaint.getTextBounds(finalProgressDesc, 0,
                 finalProgressDesc.length(), mTextBounds);
 
-        canvas.drawText(finalProgressDesc, (int) (mWidth / 2.0 - mTextBounds.width() / 2.0), (int)(mHeight/2.0-(mTextPaint.ascent()+mTextPaint.descent())/2.0f), mTextPaint);
+        canvas.drawText(finalProgressDesc, (int) (mWidth / 2.0 - mTextBounds.width() / 2.0), (int) (mHeight / 2.0 - (mTextPaint.ascent() + mTextPaint.descent()) / 2.0f), mTextPaint);
 
     }
 
@@ -255,6 +277,10 @@ public class CustomProgressBar extends View {
         mProgress = progress > mMax ? mMax : progress;
         invalidateView();
 
+        if (mProgress>= mMax && mOnFinishedListener!=null) {
+            mOnFinishedListener.onFinish();
+        }
+
     }
 
     /**
@@ -262,7 +288,6 @@ public class CustomProgressBar extends View {
      * @return
      */
     public int getMax() {
-
         return mMax ;
 
     }
@@ -285,9 +310,19 @@ public class CustomProgressBar extends View {
      * 设置当前进度条的进度(默认动画时间1.5s)
      * @param progress
      */
-    public void setCurProgress (int progress) {
+    public void setCurProgress (final int progress) {
 
-        ObjectAnimator.ofInt(this,"progress",progress).setDuration(1500).start();
+        ObjectAnimator animator = ObjectAnimator.ofInt(this, "progress", progress).setDuration(1500);
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if (mOnAnimationEndListener!=null) {
+                    mOnAnimationEndListener.onAnimationEnd();
+                }
+            }
+        });
+        animator.start();
     }
 
     /**
@@ -295,9 +330,19 @@ public class CustomProgressBar extends View {
      * @param progress 目标进度
      * @param duration 动画时长
      */
-    public void setCurProgress (int progress,long duration) {
+    public void setCurProgress (final int progress,long duration) {
 
-        ObjectAnimator.ofInt(this,"progress",progress).setDuration(duration).start();
+        ObjectAnimator animator = ObjectAnimator.ofInt(this, "progress", progress).setDuration(duration);
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if (mOnAnimationEndListener!=null) {
+                    mOnAnimationEndListener.onAnimationEnd();
+                }
+            }
+        });
+        animator.start();
 
     }
 
@@ -326,6 +371,14 @@ public class CustomProgressBar extends View {
         } else {
             postInvalidate();
         }
+    }
+
+    public interface OnFinishedListener {
+        void onFinish();
+    }
+
+    public interface OnAnimationEndListener{
+        void onAnimationEnd();
     }
 }
 

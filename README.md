@@ -22,7 +22,19 @@
 ###Advanced
 
 ```Java
-mProgressBar = (CustomProgressBar) findViewById(R.id.cpb_progresbar);
+        mProgressBar = (CustomProgressBar) findViewById(R.id.cpb_progresbar);
+        mProgressBar.setOnFinishedListener(new CustomProgressBar.OnFinishedListener() {
+                    @Override
+                    public void onFinish() {
+                        Toast.makeText(MainActivity.this,"done!",Toast.LENGTH_SHORT).show();
+                    }
+                });
+        mProgressBar.setOnAnimationEndListener(new CustomProgressBar.OnAnimationEndListener() {
+                    @Override
+                    public void onAnimationEnd() {
+                        Toast.makeText(MainActivity.this,"animation end!",Toast.LENGTH_SHORT).show();
+                    }
+                });
         mProgressBar.setProgressDesc("剩余");
         mProgressBar.setMaxProgress(100);
         mProgressBar.setProgressColor(Color.parseColor("#F6CB82"));
